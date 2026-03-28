@@ -33,7 +33,7 @@ frontend www-http
     http-request redirect scheme https code 301 unless { ssl_fc }
 
 frontend www-https
-    bind *:443 ssl crt /etc/ssl/private/www.bizimacj.tech.pem
+    bind *:443 ssl crt /etc/ssl/private/www.bizima.tech.pem
     default_backend web-servers
 
 backend web-servers

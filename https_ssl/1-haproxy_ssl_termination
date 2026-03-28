@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Configures HAproxy to accept SSL traffic for www.bizimacj.tech on port 443
+# Configures HAproxy to accept SSL traffic for www.bizima.tech on port 443
 apt-get update -y
 apt-get install -y haproxy certbot
 
@@ -8,13 +8,13 @@ service haproxy stop
 
 # Obtain SSL certificate using certbot
 certbot certonly --standalone --non-interactive --agree-tos \
-    --email admin@bizimacj.tech \
-    -d www.bizimacj.tech
+    --email admin@bizima.tech \
+    -d www.bizima.tech
 
 # Combine certificate and private key for HAproxy
-cat /etc/letsencrypt/live/www.bizimacj.tech/fullchain.pem \
-    /etc/letsencrypt/live/www.bizimacj.tech/privkey.pem \
-    > /etc/ssl/private/www.bizimacj.tech.pem
+cat /etc/letsencrypt/live/www.bizima.tech/fullchain.pem \
+    /etc/letsencrypt/live/www.bizima.tech/privkey.pem \
+    > /etc/ssl/private/www.bizima.tech.pem
 
 # Configure HAproxy
 cat > /etc/haproxy/haproxy.cfg << 'EOF'
@@ -46,7 +46,7 @@ defaults
     errorfile 504 /etc/haproxy/errors/504.http
 
 frontend www-https
-    bind *:443 ssl crt /etc/ssl/private/www.bizimacj.tech.pem
+    bind *:443 ssl crt /etc/ssl/private/www.bizima.tech.pem
     default_backend web-servers
 
 backend web-servers
